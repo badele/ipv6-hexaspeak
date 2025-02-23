@@ -5,17 +5,17 @@ IPv6 address.
 
 Here are some examples
 
-| %  | word   | hexspeak | offset ipv6 hexspeak | ipv6 hexspeak |
-| -- | ------ | -------- | -------------------- | ------------- |
-| ✅ | dead   | DEAD     | DE:AD                | DEAD          |
-| 🟦 | cable  | CAB1E    | CA:B1E               | CAB1:E        |
-| 🟦 | iot    | 107      | 10:7                 | 107           |
-| 🟦 | acid   | AC1D     | AC:1D                | AC1D          |
-| 🟦 | casa   | CA5A     | CA:5A                | CA5A          |
-| 🟨 | office | 0FF1CE   | 0F:F1CE              | 0FF1:CE       |
-| 🟨 | doc    | D0C      | D0:C                 | D0C           |
-| 🟨 | access | ACCE55   | AC:CE55              | ACCE:55       |
-| 🟧 | bloc   | B10C     | B1:0C                | B10C          |
+| %  | word   | hexspeak | IPv6 example   |
+| -- | ------ | -------- | -------------- |
+| ✅ | dead   | DEAD     | FD00:DEAD::    |
+| 🟦 | cables | CAB1E5   | FD00:CAB1:E5:: |
+| 🟦 | iot    | 107      | FD00:107::     |
+| 🟦 | acid   | AC1D     | FD00:AC1D::    |
+| 🟦 | casa   | CA5A     | FD00:CA5A::    |
+| 🟨 | office | 0FF1CE   | FD00:0FF1:CE:: |
+| 🟨 | doc    | D0C      | FD00:D0C::     |
+| 🟨 | access | ACCE55   | FD00:ACCE:55:: |
+| 🟧 | bloc   | B10C     | FD00:B10C::    |
 
 ## Languages hexspeak
 
@@ -23,6 +23,7 @@ Here are some examples
 | --------------------- | -------- |
 | [English](english.md) | 9300     |
 | [French](french.md)   | 4200     |
+| [Spanish](spanish.md) | 65       |
 
 ## Generate
 
@@ -32,6 +33,7 @@ Here are some examples
 nix shell nixpkgs#wordlists
 WORDLISTSPATH=$(wordlists_path)
 ENGLISH="seclists/Miscellaneous/lang-english.txt"
+SPANISH="seclists/Miscellaneous/lang-spanish.txt"
 FRENCH="seclists/Miscellaneous/lang-french-full.txt"
 
 
@@ -40,4 +42,7 @@ python generate-ipv6-hexspeak.py wordlist.txt > english.md
 
 awk '{ print length, $0 }' "${WORDLISTSPATH}/${FRENCH}" | sort -n -k1,1 -k2 | cut -d ' ' -f2- > wordlist.txt
 python generate-ipv6-hexspeak.py wordlist.txt > french.md
+
+awk '{ print length, $0 }' "${WORDLISTSPATH}/${SPANISH}" | sort -n -k1,1 -k2 | cut -d ' ' -f2- > wordlist.txt
+python generate-ipv6-hexspeak.py wordlist.txt > spanish.md
 ```
